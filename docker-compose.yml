@@ -1,0 +1,75 @@
+version: '3.8'
+
+services:
+  dhcp:
+    build: .
+    container_name: server_dhcp
+    hostname: server_dhcp
+    networks:
+      sae502:
+        ipv4_address: 192.168.120.8
+    extra_hosts:
+      - "dns:192.168.120.4"
+      - "nodemanager:192.168.120.5"
+      - "test1:192.168.120.6"
+      - "test2:192.168.120.7"
+
+  dns:
+    build: .
+    container_name: server_dns
+    hostname: server_dns
+    networks:
+      sae502:
+        ipv4_address: 192.168.120.4
+    extra_hosts:
+      - "dhcp:192.168.120.8"
+      - "nodemanager:192.168.120.5"
+      - "test1:192.168.120.6"
+      - "test2:192.168.120.7"
+
+  nodemanager:
+    build: .
+    container_name: nodemanager
+    hostname: nodemanager
+    networks:
+      sae502:
+        ipv4_address: 192.168.120.5
+    extra_hosts:
+      - "dhcp:192.168.120.8"
+      - "dns:192.168.120.4"
+      - "test1:192.168.120.6"
+      - "test2:192.168.120.7"
+
+  test1:
+    build: .
+    container_name: machine_test1
+    hostname: machine_test1
+    networks:
+      sae502:
+        ipv4_address: 192.168.120.6
+    extra_hosts:
+      - "dhcp:192.168.120.8"
+      - "dns:192.168.120.4"
+      - "nodemanager:192.168.120.5"
+      - "test2:192.168.120.7"
+
+  test2:
+    build: .
+    container_name: machine_test2
+    hostname: machine_test2
+    networks:
+      sae502:
+        ipv4_address: 192.168.120.7
+    extra_hosts:
+      - "dhcp:192.168.120.8"
+      - "dns:192.168.120.4"
+      - "nodemanager:192.168.120.5"
+      - "test1:192.168.120.6"
+
+networks:
+  sae502:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 192.168.120.0/24
+
