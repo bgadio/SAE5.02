@@ -1,0 +1,10 @@
+── dns-dhcp-setup
+│   ├── ansible
+│   │   ├── group_vars
+│   │   │   └── all.yml
+│   │   ├── inventory
+│   │   └── playbooks
+│   │       ├── dhcp.yml
+│   │       ├── dns.yml
+│   │       ├── setup.yml
+│   │       └── test_machines.yml
