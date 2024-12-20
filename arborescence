@@ -6,5 +6,4 @@
 │   │   └── playbooks
 │   │       ├── dhcp.yml
 │   │       ├── dns.yml
-│   │       ├── setup.yml
 │   │       └── test_machines.yml
