@@ -1,0 +1,8 @@
+[server_dhcp]
+dhcp-server ansible_host=192.168.130.4
+
+[server_dns]
+dns-server ansible_host=192.168.130.5
+
+[test_machine]
+machine_test ansible_host=192.168.130.6
